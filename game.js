@@ -21,7 +21,7 @@ const controller = {
     right: false,
     up: false,
 
-    keyListner: function (event) {
+    keyListener: function (event) {
 
         let key_state = (event.type == "keydown") ? true : false;
 
@@ -39,7 +39,7 @@ const controller = {
     }
 }
 
-const loop = () => {
+const loop = function () {
     if (controller.up && square.jumping == false) {
         square.yVelocity -= 20;
         square.jumping = true;
@@ -80,7 +80,12 @@ const loop = () => {
     context.fillRect(0, 0, 1220, 400)
 
 
-    // Cube
+    context.fillStyle = "#8DAA9D"; // hex for cube color
+    context.beginPath();
+    context.rect(square.x, square.y, square.width, square.height);
+    context.fill();
+
+    // Ground
     context.fillStyle = "#2E2532"
     context.lineWidth = 30;
     context.beginPath()
