@@ -1,6 +1,7 @@
 console.log("connected")
 
 const context = document.querySelector("canvas").getContext("2d");
+const level = document.querySelector(".level")
 
 context.canvas.height = 400;
 // width set to 1220 on the example
@@ -9,21 +10,19 @@ context.canvas.width = 1120;
 
 // Obstacles
 let frameCount = 1;
-
 let obCount = frameCount;
-
 const obXCoors = []
 
 // For Each Level
 const nextFrame = () => {
-
     // Level Up
+    level.textContent = `Level: ${frameCount}`
     frameCount++;
-
     for (let i = 0; i < obCount; i++) {
         // Randomly generate the x coordinate for the top corner start of the triangles
         obXCoor = Math.floor(Math.random() * (1165 - 140 + 1) + 140);
         obXCoors.push(obXCoor);
+
     }
 }
 
@@ -75,13 +74,9 @@ const loop = function () {
     }
 
     square.yVelocity += 1.5;
-
     square.x += square.xVelocity;
-
     square.y += square.yVelocity;
-
     square.xVelocity *= 0.9;
-
     square.yVelocity *= 0.9;
 
     if (square.y > 386 - 16 - 32) {
@@ -99,7 +94,6 @@ const loop = function () {
     }
 
     // Backdrop
-
     context.fillStyle = "#333333"
     context.fillRect(0, 0, 1220, 400)
 
