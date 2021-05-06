@@ -7,7 +7,7 @@ context.canvas.height = 400;
 context.canvas.width = 1120;
 
 
-// Obsticles
+// Obstacles
 let frameCount = 1;
 
 let obCount = frameCount;
@@ -18,14 +18,12 @@ const obXCoors = []
 const nextFrame = () => {
 
     // Level Up
-
-    frameCount++
-
+    frameCount++;
 
     for (let i = 0; i < obCount; i++) {
-
-        obXCoors = Math.floor(Math.random() * (1165 - 140 + 1) + 140)
-        obXCoors.push(obXCoors)
+        // Randomly generate the x coordinate for the top corner start of the triangles
+        obXCoor = Math.floor(Math.random() * (1165 - 140 + 1) + 140);
+        obXCoors.push(obXCoor);
     }
 }
 
@@ -97,6 +95,7 @@ const loop = function () {
 
     } else if (square.x > 1220) {
         square.x = -20
+        nextFrame()
     }
 
     // Backdrop
@@ -110,8 +109,27 @@ const loop = function () {
     context.rect(square.x, square.y, square.width, square.height);
     context.fill();
 
+
+    // Obstacles
+    const height = 200 * Math.cos(Math.PI / 6);
+
+    context.fillStyle = "#FBF5F3"; // hex for triangle color
+    obXCoors.forEach((obXCoor) => {
+        context.beginPath();
+
+        context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
+        context.lineTo(obXCoor + 20, 385); // x = ^random + 20, y = coor. on "ground"
+        context.lineTo(obXCoor + 10, 510 - height); // x = ^random + 10, y = peak of triangle
+
+        context.closePath();
+        context.fill();
+    })
+
+
+
+
     // Ground
-    context.strokeStyle = "#00000"
+    context.strokeStyle = "#2E2532"
     context.lineWidth = 30;
     context.beginPath()
     context.moveTo(0, 385)
