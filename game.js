@@ -38,3 +38,61 @@ const controller = {
         }
     }
 }
+
+const loop = () => {
+    if (controller.up && square.jumping == false) {
+        square.yVelocity -= 20;
+        square.jumping = true;
+    }
+    if (controller.left) {
+        square.xVelocity -= 0.5;
+    }
+    if (controller.right) {
+        square.xVelocity += 0.5;
+    }
+
+    square.yVelocity += 1.5;
+
+    square.x += square.xVelocity;
+
+    square.y += square.yVelocity;
+
+    square.xVelocity *= 0.9;
+
+    square.yVelocity *= 0.9;
+
+    if (square.y > 386 - 16 - 32) {
+        square.jumping = false;
+        square.y = 386 - 16 - 32;
+        square.yVelocity = 0;
+    }
+
+    if (square.x < -20) {
+        square.x = 1220
+
+    } else if (square.x > 1220) {
+        square.x = -20
+    }
+
+    // Backdrop
+
+    context.fillStyle = "#201A21"
+    context.fillRect(0, 0, 1220, 400)
+
+
+    // Cube
+    context.fillStyle = "#2E2532"
+    context.lineWidth = 30;
+    context.beginPath()
+    context.moveTo(0, 385)
+    context.lineTo(1220, 385)
+    context.stroke()
+
+    window.requestAnimationFrame(loop)
+
+}
+
+window.addEventListener("keydown", controller.keyListener)
+window.addEventListener("keyup", controller.keyListener)
+
+window.requestAnimationFrame(loop)
