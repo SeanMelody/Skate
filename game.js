@@ -31,11 +31,22 @@ function collisionDetection() {
     for (let i = 0; i < obCount; i++) {
         let objLoc = obXCoors[i]
         console.log(objLoc)
-        // if()
+        if (square.x === objLoc) {
+            console.log("hi")
+        }
     }
 }
 
 
+const head = {
+    height: 32,
+    width: 32,
+}
+
+const body = {
+    height: 55,
+    width: 25
+}
 
 // Turn to skater
 const square = {
@@ -47,6 +58,7 @@ const square = {
     y: 0,
     yVelocity: 0
 }
+
 
 const controller = {
     left: false,
@@ -111,6 +123,7 @@ const loop = function () {
     context.fillStyle = "#8DAA9D"; // hex for cube color
     context.beginPath();
     context.rect(square.x, square.y, square.width, square.height);
+    // context.rect(square.x, square.y, head.height, body.width)
     context.fill();
 
 
