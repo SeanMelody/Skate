@@ -24,7 +24,17 @@ const nextFrame = () => {
         obXCoors.push(obXCoor);
 
     }
+    collisionDetection()
 }
+
+function collisionDetection() {
+    for (let i = 0; i < obCount; i++) {
+        let objLoc = obXCoors[i]
+        console.log(objLoc)
+        // if()
+    }
+}
+
 
 
 // Turn to skater
