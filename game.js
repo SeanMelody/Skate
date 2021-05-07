@@ -31,14 +31,14 @@ function collisionDetection() {
     for (let i = 0; i < obCount; i++) {
         let objLoc = obXCoors[i]
         console.log(objLoc)
-        if (square.x === objLoc) {
+        if (player.x === objLoc) {
             console.log("hi")
         }
     }
 }
 
-// Turn to skater
-const square = {
+// player is the player
+const player = {
     height: 64,
     jumping: true,
     width: 32,
@@ -48,10 +48,11 @@ const square = {
     yVelocity: 0
 }
 
+// Set the skater image to an Image
 const skaterImg = new Image()
 skaterImg.src = "./Skater.png"
 
-
+// Set up the controller
 const controller = {
     left: false,
     right: false,
@@ -75,59 +76,61 @@ const controller = {
     }
 }
 
+// Animate it all with the loop function
 const loop = function () {
-    if (controller.up && square.jumping == false) {
-        square.yVelocity -= 20;
-        square.jumping = true;
+    if (controller.up && player.jumping == false) {
+        player.yVelocity -= 20;
+        player.jumping = true;
     }
     if (controller.left) {
-        square.xVelocity -= 0.5;
+        player.xVelocity -= 0.5;
     }
     if (controller.right) {
-        square.xVelocity += 0.5;
+        player.xVelocity += 0.5;
     }
 
-    square.yVelocity += 1.5;
-    square.x += square.xVelocity;
-    square.y += square.yVelocity;
-    square.xVelocity *= 0.9;
-    square.yVelocity *= 0.9;
+    player.yVelocity += 1.5;
+    player.x += player.xVelocity;
+    player.y += player.yVelocity;
+    player.xVelocity *= 0.9;
+    player.yVelocity *= 0.9;
 
-    if (square.y > 386 - 16 - 64) {
-        square.jumping = false;
-        square.y = 386 - 16 - 64;
-        square.yVelocity = 0;
+    if (player.y > 386 - 16 - 64) {
+        player.jumping = false;
+        player.y = 386 - 16 - 64;
+        player.yVelocity = 0;
     }
 
-    if (square.x < -20) {
-        square.x = 1220
+    if (player.x < -20) {
+        player.x = 1220
 
-    } else if (square.x > 1220) {
-        square.x = -20
+    } else if (player.x > 1220) {
+        player.x = -20
         nextFrame()
     }
 
-    // Backdrop
-    context.fillStyle = "#333333"
+    // Backdrop solid color
+    // context.fillStyle = "#333333"
+    // context.fillRect(0, 0, 1220, 400)
+
+    // Linear Gradient Background
+    const gradient = context.createLinearGradient(0, 500, 0, 0)
+    gradient.addColorStop(0, "blue")
+    gradient.addColorStop(1, "aqua")
+    context.fillStyle = gradient
     context.fillRect(0, 0, 1220, 400)
 
     // Player
     // context.fillStyle = "#8DAA9D"; // hex for cube color
     // context.beginPath();
-    // context.rect(square.x, square.y, square.width, square.height);
-    // // context.rect(square.x, square.y, head.height, body.width)
+    // context.rect(player.x, player.y, player.width, player.height);
+    // // context.rect(player.x, player.y, head.height, body.width)
     // context.fill();
 
     // Skater
-    context.drawImage(skaterImg, square.x, square.y, square.width, square.height)
+    context.drawImage(skaterImg, player.x, player.y, player.width, player.height)
     context.beginPath();
-    context.rect(skaterImg, 0, 0, square.width, square.height);
-    // context.fill()
-
-    // Skater long way
-    // function drawSprite(skaterImg, sx, sy, sw, sh, dx, dy, dw, dh {
-    //     context.draw
-    // })
+    context.rect(skaterImg, 0, 0, player.width, player.height);
 
     // Obstacles
     const height = 200 * Math.cos(Math.PI / 6);
@@ -144,11 +147,8 @@ const loop = function () {
         context.fill();
     })
 
-
-
-
     // Ground
-    context.strokeStyle = "#2E2532"
+    context.strokeStyle = "grey"
     context.lineWidth = 30;
     context.beginPath()
     context.moveTo(0, 385)
