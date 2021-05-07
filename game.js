@@ -3,7 +3,7 @@ console.log("connected")
 const context = document.querySelector("canvas").getContext("2d");
 const level = document.querySelector(".level")
 
-context.canvas.height = 400;
+context.canvas.height = 250;
 // width set to 1220 on the example height 400
 context.canvas.width = 800;
 
@@ -20,7 +20,7 @@ const nextFrame = () => {
     frameCount++;
     for (let i = 0; i < obCount; i++) {
         // Randomly generate the x coordinate for the top corner start of the triangles
-        obXCoor = Math.floor(Math.random() * (765 - 140 + 1) + 140);
+        obXCoor = Math.floor(Math.random() * (765 - 35 + 1) + 140);
         obXCoors.push(obXCoor);
 
     }
@@ -96,9 +96,9 @@ const loop = function () {
     player.xVelocity *= 0.9;
     player.yVelocity *= 0.9;
 
-    if (player.y > 386 - 16 - 64) {
+    if (player.y > 243 - 16 - 64) {
         player.jumping = false;
-        player.y = 386 - 16 - 64;
+        player.y = 243 - 16 - 64;
         player.yVelocity = 0;
     }
 
@@ -119,7 +119,7 @@ const loop = function () {
     gradient.addColorStop(0, "aqua")
     gradient.addColorStop(1, "yellow")
     context.fillStyle = gradient
-    context.fillRect(0, 0, 1220, 400)
+    context.fillRect(0, 0, 800, 250)
 
     // Square
     // context.fillStyle = "#8DAA9D"; // hex for cube color
@@ -135,14 +135,17 @@ const loop = function () {
 
     // Obstacles
     const height = 200 * Math.cos(Math.PI / 6);
+    // const width = 50
+    context.fillStyle = "red"; // "#FBF5F3" hex for triangle color
 
-    context.fillStyle = "#FBF5F3"; // hex for triangle color
     obXCoors.forEach((obXCoor) => {
         context.beginPath();
 
-        context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
-        context.lineTo(obXCoor + 20, 385); // x = ^random + 20, y = coor. on "ground"
-        context.lineTo(obXCoor + 10, 510 - height); // x = ^random + 10, y = peak of triangle
+        context.moveTo(obXCoor, 235); // x = random, y = coor. on "ground"
+        // context.lineTo(obXCoor + 20, 235); // x = ^random + 20, y = coor. on "ground"
+        // context.lineTo(obXCoor + 10, 350 - height); // x = ^random + 10, y = peak of triangle
+
+        context.rect(obXCoor + 20, 190, 32, 32)
 
         context.closePath();
         context.fill();
@@ -152,8 +155,8 @@ const loop = function () {
     context.strokeStyle = "grey"
     context.lineWidth = 30;
     context.beginPath()
-    context.moveTo(0, 385)
-    context.lineTo(1220, 385)
+    context.moveTo(0, 235)
+    context.lineTo(800, 235)
     context.stroke()
 
     window.requestAnimationFrame(loop)
