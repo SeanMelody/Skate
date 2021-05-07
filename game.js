@@ -4,8 +4,8 @@ const context = document.querySelector("canvas").getContext("2d");
 const level = document.querySelector(".level")
 
 context.canvas.height = 400;
-// width set to 1220 on the example
-context.canvas.width = 1120;
+// width set to 1220 on the example height 400
+context.canvas.width = 800;
 
 
 // Obstacles
@@ -20,13 +20,14 @@ const nextFrame = () => {
     frameCount++;
     for (let i = 0; i < obCount; i++) {
         // Randomly generate the x coordinate for the top corner start of the triangles
-        obXCoor = Math.floor(Math.random() * (1165 - 140 + 1) + 140);
+        obXCoor = Math.floor(Math.random() * (765 - 140 + 1) + 140);
         obXCoors.push(obXCoor);
 
     }
     collisionDetection()
 }
 
+// To determine if player hit an object
 function collisionDetection() {
     for (let i = 0; i < obCount; i++) {
         let objLoc = obXCoors[i]
@@ -102,9 +103,9 @@ const loop = function () {
     }
 
     if (player.x < -20) {
-        player.x = 1220
+        player.x = 810
 
-    } else if (player.x > 1220) {
+    } else if (player.x > 810) {
         player.x = -20
         nextFrame()
     }
@@ -115,16 +116,16 @@ const loop = function () {
 
     // Linear Gradient Background
     const gradient = context.createLinearGradient(0, 500, 0, 0)
-    gradient.addColorStop(0, "blue")
-    gradient.addColorStop(1, "aqua")
+    gradient.addColorStop(0, "aqua")
+    gradient.addColorStop(1, "yellow")
     context.fillStyle = gradient
     context.fillRect(0, 0, 1220, 400)
 
-    // Player
+    // Square
     // context.fillStyle = "#8DAA9D"; // hex for cube color
     // context.beginPath();
-    // context.rect(player.x, player.y, player.width, player.height);
-    // // context.rect(player.x, player.y, head.height, body.width)
+    // context.rect(square.x, square.y, square.width, square.height);
+    // // context.rect(square.x, square.y, head.height, body.width)
     // context.fill();
 
     // Skater
