@@ -19,22 +19,28 @@ const nextFrame = () => {
     level.textContent = `Level: ${frameCount}`
     frameCount++;
     for (let i = 0; i < obCount; i++) {
-        // Randomly generate the x coordinate for the top corner start of the triangles
-        obXCoor = Math.floor(Math.random() * (765 - 35 + 1) + 140);
+        // Randomly generate the x coordinate for the top corner start of the rectangle
+        obXCoor = Math.floor(Math.random() * (765 - 35 + 1) + 100);
         obXCoors.push(obXCoor);
 
     }
-    collisionDetection()
+    // collisionDetection()
 }
 
 // To determine if player hit an object
 function collisionDetection() {
-    for (let i = 0; i < obCount; i++) {
+    // console.log(player.x)
+    for (let i = 0; i < (frameCount - 1); i++) {
         let objLoc = obXCoors[i]
-        console.log(objLoc)
-        if (player.x === objLoc) {
-            console.log("hi")
+        // console.log(objLoc)
+        // if (player.x == objLoc && player.jumping == false) {
+        //     console.log("player hit a brick")
+        // }
+        let playerNoDecimal = Math.trunc(player.x)
+        if (playerNoDecimal == objLoc) {
+            console.log("player hit a brick")
         }
+
     }
 }
 
@@ -77,6 +83,7 @@ const controller = {
     }
 }
 
+
 // Animate it all with the loop function
 const loop = function () {
     if (controller.up && player.jumping == false) {
@@ -109,6 +116,8 @@ const loop = function () {
         player.x = -20
         nextFrame()
     }
+
+    collisionDetection()
 
     // Backdrop solid color
     // context.fillStyle = "#333333"
