@@ -37,7 +37,7 @@ function collisionDetection() {
         //     console.log("player hit a brick")
         // }
         let playerNoDecimal = Math.trunc(player.x)
-        if (playerNoDecimal == objLoc) {
+        if (playerNoDecimal === objLoc && player.jumping === false) {
             console.log("player hit a brick")
         }
 
