@@ -42,6 +42,10 @@ function collisionDetection() {
         }
 
     }
+    // let playerNoDecimal = Math.trunc(player.x)
+    // if (playerNoDecimal == obXCoors) {
+    //     console.log("player hit a brick")
+    // }
 }
 
 // player is the player
