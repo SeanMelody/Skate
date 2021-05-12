@@ -137,7 +137,8 @@ const loop = function () {
     const height = 200 * Math.cos(Math.PI / 6);
     // const width = 50
     context.fillStyle = "red"; // "#FBF5F3" hex for triangle color
-
+    context.lineWidth = 3;
+    context.strokeStyle = "black"
     obXCoors.forEach((obXCoor) => {
         context.beginPath();
 
@@ -149,6 +150,7 @@ const loop = function () {
 
         context.closePath();
         context.fill();
+        context.stroke()
     })
 
     // Ground
