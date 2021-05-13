@@ -18,7 +18,7 @@ const obXCoors = []
 // For Each Level
 const nextFrame = () => {
     // Level Up
-    level.textContent = `Level: ${frameCount}`
+    // level.textContent = `Level: ${frameCount}`
     frameCount++;
     for (let i = 0; i < obCount; i++) {
         // Randomly generate the x coordinate for the top corner start of the rectangle
@@ -225,6 +225,18 @@ const loop = function () {
     context.moveTo(0, 235)
     context.lineTo(800, 235)
     context.stroke()
+
+    // Health Display
+    context.font = "25px Arial";
+    context.fillStyle = "black"
+    context.fillText(`Your Health: ${health}`, 585, 50);
+
+
+    // Level Display
+    context.font = "25px Arial";
+    context.fillStyle = "black"
+    context.fillText(`Level: ${frameCount - 1}`, 25, 50);
+
 
     collisionDetection()
 
