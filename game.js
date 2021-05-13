@@ -53,18 +53,35 @@ function collisionDetection() {
 
     // }
 
-    for (let i = 0; i < obXCoors.length; i++) {
-        let object = obXCoors[i];
-        let playerNoDecimal = Math.trunc(player.x)
-        // console.log(playerNoDecimal)
-        if (playerNoDecimal == object && player.jumping === false) {
-            console.log("hit")
-            health = health - 10
-            healthDisplay.textContent = health
+    if (health > 0) {
+
+        // For loop to loop through the object locations, and if the player runs into one, deduct health
+        for (let i = 0; i < obXCoors.length; i++) {
+            let object = obXCoors[i];
+            let playerNoDecimal = Math.trunc(player.x)
+            // console.log(playerNoDecimal)
+            if (playerNoDecimal == object && player.jumping === false) {
+                // console.log("hit")
+                health = health - 10
+                healthDisplay.textContent = `Your Health: ${health}`
+            }
+
         }
+    } else {
+
+        const gradient = context.createLinearGradient(0, 500, 0, 0)
+        gradient.addColorStop(0, "black")
+        gradient.addColorStop(1, "red")
+        context.fillStyle = gradient
+        context.fillRect(0, 0, 800, 250)
+
+        context.font = "75px Arial";
+        context.fillStyle = "white"
+        // context.textAlign = "center"
+        context.fillText("GAME OVER", 100, 150);
+
 
     }
-
     // console.log(obXCoors)
 
     // let playerNoDecimal = Math.trunc(player.x)
@@ -122,7 +139,6 @@ const controller = {
         }
     }
 }
-
 
 // Animate it all with the loop function
 const loop = function () {
