@@ -63,7 +63,7 @@ function collisionDetection() {
             if (playerNoDecimal == object && player.jumping === false) {
                 // console.log("hit")
                 health = health - 20
-                healthDisplay.textContent = `Your Health: ${health}`
+                // healthDisplay.textContent = `Your Health: ${health}`
             }
 
         }
