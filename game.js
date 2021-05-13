@@ -2,6 +2,8 @@ console.log("connected")
 
 const context = document.querySelector("canvas").getContext("2d");
 const level = document.querySelector(".level")
+const healthDisplay = document.querySelector(".health")
+let health = 100;
 
 context.canvas.height = 250;
 // width set to 1220 on the example height 400
@@ -24,29 +26,63 @@ const nextFrame = () => {
         obXCoors.push(obXCoor);
 
     }
+
+    // console.log(obXCoors)
     // collisionDetection()
 }
 
 // To determine if player hit an object
 function collisionDetection() {
-    // console.log(player.x)
-    for (let i = 0; i < (frameCount - 1); i++) {
-        let objLoc = obXCoors[i]
-        // console.log(objLoc)
-        // if (player.x == objLoc && player.jumping == false) {
-        //     console.log("player hit a brick")
-        // }
+    // for (let i = 0; i < obXCoors.length; i++) {
+    //     console.log(obXCoors[i])
+    //     if (player.x === obXCoors) {
+    //         console.log("hit")
+    //     }
+    // }
+    // // console.log(player.x)
+    // for (let i = 0; i < obXCoors.length; i++) {
+    //     let objLoc = obXCoors[i]
+    //     // console.log(obXCoors)
+    //     // if (player.x == objLoc && player.jumping == false) {
+    //     //     console.log("player hit a brick")
+    //     // }
+    //     let playerNoDecimal = Math.trunc(player.x)
+    //     if (playerNoDecimal === objLoc && player.jumping === false) {
+    //         console.log("player hit a brick")
+    //     }
+
+    // }
+
+    for (let i = 0; i < obXCoors.length; i++) {
+        let object = obXCoors[i];
         let playerNoDecimal = Math.trunc(player.x)
-        if (playerNoDecimal === objLoc && player.jumping === false) {
-            console.log("player hit a brick")
+        // console.log(playerNoDecimal)
+        if (playerNoDecimal == object && player.jumping === false) {
+            console.log("hit")
+            health = health - 10
+            healthDisplay.textContent = health
         }
 
     }
+
+    // console.log(obXCoors)
+
     // let playerNoDecimal = Math.trunc(player.x)
     // if (playerNoDecimal == obXCoors) {
     //     console.log("player hit a brick")
     // }
+
+    // if (player.x == obXCoor) {
+    //     console.log("hit")
+    // }
+
+
+
 }
+
+
+
+
 
 // player is the player
 const player = {
@@ -121,7 +157,7 @@ const loop = function () {
         nextFrame()
     }
 
-    collisionDetection()
+    // collisionDetection()
 
     // Backdrop solid color
     // context.fillStyle = "#333333"
@@ -173,6 +209,8 @@ const loop = function () {
     context.moveTo(0, 235)
     context.lineTo(800, 235)
     context.stroke()
+
+    collisionDetection()
 
     window.requestAnimationFrame(loop)
 
