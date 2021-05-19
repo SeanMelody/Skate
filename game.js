@@ -22,7 +22,7 @@ const nextFrame = () => {
     frameCount++;
     for (let i = 0; i < obCount; i++) {
         // Randomly generate the x coordinate for the top corner start of the rectangle
-        obXCoor = Math.floor(Math.random() * (765 - 35 + 1) + 100);
+        obXCoor = Math.floor(Math.random() * (700 - 35 + 1) + 100);
         obXCoors.push(obXCoor);
 
     }
@@ -60,7 +60,7 @@ function collisionDetection() {
             let object = obXCoors[i];
             let playerNoDecimal = Math.trunc(player.x)
             // console.log(playerNoDecimal)
-            if (playerNoDecimal == object && player.jumping === false) {
+            if (playerNoDecimal == (object - 10) && player.jumping === false) {
                 // console.log("hit")
                 health = health - 20
                 // healthDisplay.textContent = `Your Health: ${health}`
